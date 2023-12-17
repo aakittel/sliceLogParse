@@ -1,0 +1,44 @@
+Script to parse sf-slice* logs
+Requires a --directory (-d) argument. Path to the node support bundle
+Requires a --volumeID (-v) argument.
+Optional --prefix (-p) argument. Allows a prefix to the output files. Otherwise named 
+  {args.volumeid}-summary-{time_stamp}.txt
+  {args.volumeid}-messages-{time_stamp}.txt
+
+example:
+  python /data/user/akittel/slicelogs.py -d supportbundle.clt-a-a05-23-2-sn-ba-iscsi -v 89
+
+Looks for the following
+    "FIRST WRITE SCSITask"
+    "FIRST READ SCSITask"
+    "WRITE FAILED"
+    "READ FAILED"
+    "xCompareFailed"
+    "SendCommandCheckConditionResponse"
+    "SendCommandErrorResponse"
+    "DESTRUC"
+    "Destroyed"
+    "CONSTRUCT"
+    "FullFeature"
+    "REDIRECT"
+
+Produces a summary report file and messages report file.
+Summary report contains
+++ Initiators found
+++ Sense codes found
+++ Sessions found
+++ Aborts found
+++ Shutdowns found
+++ Counts
+FIRST WRITE SCSITask: 0
+FIRST READ SCSITask: 0
+WRITE FAILED: 0
+READ FAILED: 0
+xCompareFailed: 0
+SendCommandCheckConditionResponse: 0
+SendCommandErrorResponse: 0
+DESTRUC: 0
+Destroyed: 0
+CONSTRUCT: 0
+FullFeature: 0
+REDIRECT: 0
