@@ -3,7 +3,14 @@ import glob
 import gzip
 import os
 from datetime import datetime
-
+"""
+ NetApp / SolidFire
+ CPE 
+ sf-slice log parse utility
+"""
+"""
+Add start and end timestamp option
+"""
 """
 BUGS
 
@@ -359,7 +366,9 @@ sense_codes = [
     "x6500 voltage fault",
     "x≥80x Vendor specific",
     "xx≥80 Vendor specific",
-    "0x18 Reservation conflict"
+    "0x18 Reservation conflict",
+    "0x28 Task Set Full",
+    "0x40 Task Aborted"
     ]
 
 
