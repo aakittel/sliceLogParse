@@ -151,7 +151,7 @@ grep_dict = {
     "REDIRECT": 0,
     "live-to-dead": 0,
     "Overdue heartbeat": 0,
-    "Heartbeat response returned an error", 0
+    "Heartbeat response returned an error": 0
 }
 
 sense_reference = "https://en.wikipedia.org/wiki/Key_Code_Qualifier"
