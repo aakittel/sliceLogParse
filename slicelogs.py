@@ -36,6 +36,7 @@ def get_args():
 #============================================================
 # Recursively find all required log files
 def find_logs(args, prefix="sf-slice"):
+    print(f'find {args.directory}/logs/{prefix}*')
     result = []
     result = glob.glob(f'{args.directory}/logs/{prefix}*')
     if result:    
@@ -112,7 +113,11 @@ def get_initiator(message):
         if 'initiatorPortName' in word:
             id = word.split('=')[1]
             initiators.add(id)
-            
+
+#============================================================
+# Get offline volumes
+#The following volumes are offline            
+
 #============================================================
 # Parse the /var/run/log files
 def log_search(contents):
@@ -143,7 +148,10 @@ grep_dict = {
     "Destroyed": 0,
     "CONSTRUCT": 0,
     "FullFeature": 0,
-    "REDIRECT": 0
+    "REDIRECT": 0,
+    "live-to-dead": 0,
+    "Overdue heartbeat": 0,
+    "Heartbeat response returned an error", 0
 }
 
 sense_reference = "https://en.wikipedia.org/wiki/Key_Code_Qualifier"
@@ -385,8 +393,12 @@ if __name__ == "__main__":
 
     date_time = datetime.now()
     time_stamp = date_time.strftime("%d-%b-%Y-%H.%M.%S")
-    summary_file = f'{args.volumeid}-summary-{time_stamp}.txt'
-    messages_file = f'{args.volumeid}-messages-{time_stamp}.txt'
+    if args.prefix is None:
+        summary_file = f'{args.volumeid}-summary-{time_stamp}.txt'
+        messages_file = f'{args.volumeid}-messages-{time_stamp}.txt'
+    else:
+        summary_file = f'{args.prefix}-{args.volumeid}-summary-{time_stamp}.txt'
+        messages_file = f'{args.prefix}-{args.volumeid}-messages-{time_stamp}.txt'
     
     print(f'\nWriting report to {summary_file}')
     with open(summary_file, '+w') as outputfile:
